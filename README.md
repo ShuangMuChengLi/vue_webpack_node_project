@@ -12,8 +12,7 @@ A base project build with Vue.js\webpack\Node.js.
   node ./bin/www
 ```
 ```
-  set ./bin/www line 23 
-  var app = require('../app-dev');
-  then
+  npm i
+  var app = require('../app-dev');   // ./bin/www line 23 
   node ./bin/www
 ```
