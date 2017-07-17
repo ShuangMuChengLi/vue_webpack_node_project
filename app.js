@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var log = log4js.getLogger("app");
 
 var getData = require('./routes/getData');
+var apiTest = require('./routes/api-test');
 
 var app = express();
 app.use(compression());
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'uploads')));
 
 
 app.use('/json', getData);
+app.use('/api', apiTest);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

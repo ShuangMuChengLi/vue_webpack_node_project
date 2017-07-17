@@ -18,15 +18,19 @@
         created:function () {
 	        es6Test();
 	        class Point{
-		        constructor(x,y){
-			        this.x = x;
-			        this.y = y;
+		        constructor(...args){
+			        this.args = args
 		        }
-		        toString(){
-			        return '(' + this.x + ',' + this.y + ')';
+		        *[Symbol.iterator](){
+			        for(let arg of this.args){
+				        yield arg;
+			        }
 		        }
 	        }
-	        console.log((new Point(1,2)).toString());
+	        var o = new Point('hello' , 'world');
+	        for(let x of o){
+		        console.log(x);
+	        }
         },
         mounted:function () {
 
