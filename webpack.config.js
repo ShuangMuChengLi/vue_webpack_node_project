@@ -44,7 +44,8 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      name:['vendor', 'manifest']
+      name:['vendor', 'manifest'],
+      minChunks: Infinity
     }),
     new BabiliPlugin(),
     new HtmlwebpackPlugin({
