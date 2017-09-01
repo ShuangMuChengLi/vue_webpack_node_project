@@ -19,6 +19,15 @@ module.exports = {
   },
    module: {
      rules: [
+       {
+           test: /\.(js|vue)$/,
+           loader: 'eslint-loader',
+           enforce: 'pre',
+           include: [ROOT_PATH],
+           options: {
+               formatter: require('eslint-friendly-formatter')
+           }
+       },
       {
         test: /\.(png|jpg)$/,
         use: [{
