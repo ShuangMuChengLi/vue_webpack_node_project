@@ -1,10 +1,10 @@
-var express = require('express');
-var url = require('url');
-var qs = require('querystring');//解析参数的库
-var http=require('http');
-var router = express.Router();
-var async = require("async");
-var session = require('express-session');
+let express = require('express');
+let url = require('url');
+let qs = require('querystring');//解析参数的库
+let http=require('http');
+let router = express.Router();
+let async = require("async");
+let session = require('express-session');
 router.use(session({
 	secret: 'keyboard cat',
 	resave: false,
@@ -12,17 +12,17 @@ router.use(session({
 }));
 /* GET users listing. */
 router.post('/', function(routeReq, routeRes, next) {
-	var arg = routeReq.body;
-	var pageUrl =  arg['page'];
-	var method =  arg['method'] || 'POST';
-	var pageObject = url.parse(pageUrl);
+	let arg = routeReq.body;
+	let pageUrl =  arg['page'];
+	let method =  arg['method'] || 'POST';
+	let pageObject = url.parse(pageUrl);
 	delete arg['page'];
 	delete arg['method'];
 	pageObject.port = pageObject.port || 80;
-	var postData = JSON.stringify(arg);
-	// var postData = qs.stringify(arg);
-	var path = "";
-	var headers = {};
+	let postData = JSON.stringify(arg);
+	// let postData = qs.stringify(arg);
+	let path = "";
+	let headers = {};
 	if(method == "GET"){
 		path = pageObject.pathname + "?" + qs.stringify(arg);
 		headers = {
@@ -36,7 +36,7 @@ router.post('/', function(routeReq, routeRes, next) {
 			'Content-Length': Buffer.byteLength(postData)
 		}
 	}
-	var options = {
+	let options = {
 		hostname: pageObject.hostname,
 		port: pageObject.port,
 		path:path,
@@ -44,29 +44,29 @@ router.post('/', function(routeReq, routeRes, next) {
 		timeout:5000,
 		headers: headers
 	};
-	var req = http.request(options, (res) => {
+	let req = http.request(options, (res) => {
 		console.log(`STATUS: ${res.statusCode}`);
 		console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
 		if(res.statusCode !== 200){
-			var err = new Error();
+			let err = new Error();
 			err.code = res.statusCode;
 			next(err);
 			return;
 		}
 		res.setEncoding('utf8');
-		var aResData = [];
+		let aResData = [];
 		res.on('data', (chunk) => {
 			aResData.push(chunk);
 		});
 		res.on('end', () => {
-			var resData = aResData.join("");
+			let resData = aResData.join("");
 			routeRes.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
-			var data = resData.toString();
+			let data = resData.toString();
 			routeRes.end(data);
 		});
 	});
 	req.on('timeout',function(){
-		var err = new Error();
+		let err = new Error();
 		err.code = "504";
 		err.message = "请求超时:" + pageUrl;
 		next(err);

@@ -1,7 +1,7 @@
 /**
  * Created by lin on 2017/6/26.
  */
-var storageUtil = {
+let storageUtil = {
     /**
      * 根据键值获取sessionStorage
      * @param key 键
@@ -10,7 +10,7 @@ var storageUtil = {
     getSession (key){
         if(typeof(Storage)!=="undefined" || typeof key != "string")
         {
-            var value = sessionStorage.getItem(key);
+            let value = sessionStorage.getItem(key);
             try {
                 value = JSON.parse(value);
             }catch (e){

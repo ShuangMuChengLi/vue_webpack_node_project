@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    var es6Test = require('../../js/service/es6');
+    let es6Test = require('../../js/service/es6');
     export default {
         data () {
             return {
@@ -27,7 +27,7 @@
 			        }
 		        }
 	        }
-	        var o = new Point('hello' , 'world');
+	        let o = new Point('hello' , 'world');
 	        for(let x of o){
 		        console.log(x);
 	        }
